@@ -49,6 +49,7 @@ class Work extends Component {
       return (
         <View>
           <Image source={{ uri: data.avatar }} style={globalStyle.imageStyle} />
+          <Text>{data.name.first_name} {data.name.last_name}</Text>
           <TouchableOpacity
             style={globalStyle.buttonStyle}
             title="click here"
@@ -71,7 +72,8 @@ class Work extends Component {
         </View>
       );
     } else {
-      return (<Animated.View
+      return (
+        <Animated.View
           style={{
             transform: [
               {

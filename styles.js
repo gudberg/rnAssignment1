@@ -14,11 +14,18 @@ module.exports = StyleSheet.create({
     alignItems: "center",
     marginTop: 2,
     padding: 2,
-    backgroundColor: "red"
+    backgroundColor: "lightblue",
+    borderColor: '#333',
+    borderWidth: 2,
+    borderRadius: 22,
   },
   imageStyle: {
     borderColor: "black",
     height: 180,
     borderWidth: 1
+  },
+  marginizer: {
+    marginBottom: 12, 
+    marginTop: 12
   }
 });

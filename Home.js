@@ -32,7 +32,11 @@ export default class Home extends React.Component {
     if (this.state.home) {
       return (
         <View>
+          <View style={{marginBottom: 20}}>
           <Image source={{ uri: data.avatar }} style={globalStyle.imageStyle} />
+          </View>
+          <Text>{data.name.first_name} {data.name.last_name}</Text>
+          <View style={globalStyle.marginizer}>
           <TouchableOpacity
             style={globalStyle.buttonStyle}
             title="click here"
@@ -40,13 +44,19 @@ export default class Home extends React.Component {
           >
             <Text>Show work info</Text>
           </TouchableOpacity>
-
+          </View>
+          <View style={globalStyle.marginizer}>
           <Text>
             {data.home.address}
-            deded
           </Text>
-          <Text>{data.home.email}</Text>
+          </View>
+          <View style={globalStyle.marginizer}>
+            <Text>{data.home.email}</Text>
+          </View>
+          <View style={globalStyle.marginizer}>
           <Text>{data.home.phone_number}</Text>
+          </View>
+
         </View>
       );
     } else {
