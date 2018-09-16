@@ -1,6 +1,7 @@
 import React from "react";
-import { StyleSheet, Text, View, Image, TouchableOpacity } from "react-native";
+import { Text, View, Image, TouchableOpacity, Animated } from "react-native";
 import Work from "./Work";
+// Global styling declared in style
 var globalStyle = require("./styles");
 
 export default class Home extends React.Component {
@@ -8,11 +9,19 @@ export default class Home extends React.Component {
     super(props);
     this.changeToWork = this.changeToWork.bind(this);
     this.state = {
-      home: true
+      home: true,
+      animated: new Animated.Value(0)
     };
   }
-ded
+
   changeToWork() {
+    // Here we both add the animation and set the state home to false
+    // in order to render the Work component
+    Animated.timing(this.state.animated, {
+      toValue: 1,
+      duration: 700
+    }).start();
+
     this.setState({
       home: false
     });
@@ -32,13 +41,31 @@ ded
             <Text>Show work info</Text>
           </TouchableOpacity>
 
-          <Text>{data.home.address}</Text>
+          <Text>
+            {data.home.address}
+            deded
+          </Text>
           <Text>{data.home.email}</Text>
           <Text>{data.home.phone_number}</Text>
         </View>
       );
     } else {
-      return <Work data={this.props.data} />;
+      return (
+        <Animated.View
+          style={{
+            transform: [
+              {
+                scale: this.state.animated.interpolate({
+                  inputRange: [0, 1],
+                  outputRange: [0, 1]
+                })
+              }
+            ]
+          }}
+        >
+          <Work data={this.props.data} />
+        </Animated.View>
+      );
     }
   }
 }

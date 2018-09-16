@@ -2,7 +2,11 @@
 
 var React = require("react-native");
 
-var { StyleSheet } = React;
+var {
+  StyleSheet
+} = React;
+
+// We use this file for global styling 
 
 module.exports = StyleSheet.create({
   buttonStyle: {
@@ -13,9 +17,6 @@ module.exports = StyleSheet.create({
     backgroundColor: "red"
   },
   imageStyle: {
-    color: "blue",
-    fontWeight: "bold",
-    fontSize: 20,
     borderColor: "black",
     height: 180,
     borderWidth: 1

@@ -4,6 +4,8 @@ import { StyleSheet, Text, View } from "react-native";
 import data from "./data";
 import Home from "./Home";
 
+// We render the Home component here and send the data as props
+
 export default class App extends React.Component {
   render() {
     return (
@@ -13,7 +15,7 @@ export default class App extends React.Component {
     );
   }
 }
-
+// Default styling
 const styles = StyleSheet.create({
   container: {
     flex: 1,

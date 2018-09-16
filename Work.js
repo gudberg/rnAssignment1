@@ -5,9 +5,10 @@ import {
   Text,
   View,
   Image,
-  Button,
+  Animated,
   TouchableOpacity
 } from "react-native";
+// Global styling declared in styles.js file
 var globalStyle = require("./styles");
 import Home from "./Home";
 
@@ -23,11 +24,19 @@ class Work extends Component {
     super(props);
     this.changeToHome = this.changeToHome.bind(this);
     this.state = {
-      work: true
+      work: true,
+      animated: new Animated.Value(0)
     };
   }
 
   changeToHome() {
+    // Here we both add the animation and set the state home to false
+    // in order to render the Home component
+    Animated.timing(this.state.animated, {
+      toValue: 1,
+      duration: 700
+    }).start();
+
     this.setState({
       work: false
     });
@@ -62,7 +71,21 @@ class Work extends Component {
         </View>
       );
     } else {
-      return <Home data={this.props.data} />;
+      return (<Animated.View
+          style={{
+            transform: [
+              {
+                scale: this.state.animated.interpolate({
+                  inputRange: [0, 1],
+                  outputRange: [0, 1]
+                })
+              }
+            ]
+          }}
+        >
+        <Home data={this.props.data} />;
+      </Animated.View>
+      )
     }
   }
 }
