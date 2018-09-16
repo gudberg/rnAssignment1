@@ -32,35 +32,43 @@ export default class Home extends React.Component {
     if (this.state.home) {
       return (
         <View>
-          <View style={{marginBottom: 20}}>
-          <Image source={{ uri: data.avatar }} style={globalStyle.imageStyle} />
+          <View style={globalStyle.information}>
+            <Text style={globalStyle.text}>Home Information</Text>
           </View>
-          <Text>{data.name.first_name} {data.name.last_name}</Text>
-          <View style={globalStyle.marginizer}>
-          <TouchableOpacity
-            style={globalStyle.buttonStyle}
-            title="click here"
-            onPress={this.changeToWork}
-          >
-            <Text>Show work info</Text>
-          </TouchableOpacity>
+          <View style={{ marginBottom: 20 }}>
+            <Image
+              source={{ uri: data.avatar }}
+              style={globalStyle.imageStyle}
+            />
           </View>
-          <View style={globalStyle.marginizer}>
-          <Text>
-            {data.home.address}
-          </Text>
+          <View style={globalStyle.names}>
+            <Text>
+              {data.name.first_name} {data.name.last_name}
+            </Text>
           </View>
-          <View style={globalStyle.marginizer}>
+          <View style={globalStyle.imageMarginizer}>
+            <TouchableOpacity
+              style={globalStyle.buttonStyle}
+              title="click here"
+              onPress={this.changeToWork}
+            >
+              <Text>Show work info</Text>
+            </TouchableOpacity>
+          </View>
+          <View style={globalStyle.informationStyle}>
+            <Text>{data.home.address}</Text>
+          </View>
+          <View style={globalStyle.informationStyle}>
             <Text>{data.home.email}</Text>
           </View>
-          <View style={globalStyle.marginizer}>
-          <Text>{data.home.phone_number}</Text>
+          <View style={globalStyle.informationStyle}>
+            <Text>{data.home.phone_number}</Text>
           </View>
-
         </View>
       );
     } else {
       return (
+        // We wrap Animated.View around the component to render the animation along the component
         <Animated.View
           style={{
             transform: [

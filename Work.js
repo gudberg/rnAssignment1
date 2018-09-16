@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import {
   StyleSheet,
-  TextInput,
   Text,
   View,
   Image,
@@ -44,35 +43,54 @@ class Work extends Component {
 
   render() {
     const data = this.props.data[0];
-    console.log(data.avatar);
     if (this.state.work) {
       return (
         <View>
-          <Image source={{ uri: data.avatar }} style={globalStyle.imageStyle} />
-          <Text>{data.name.first_name} {data.name.last_name}</Text>
-          <TouchableOpacity
-            style={globalStyle.buttonStyle}
-            title="click here"
-            onPress={this.changeToHome}
-          >
-            <Text>Show home info</Text>
-          </TouchableOpacity>
-          <Text style={styles.border}>{data.work.address}</Text>
-          <TextInput
-            style={styles.border}
-            editable={false}
-            value={data.work.address}
-          />
-          <Text style={styles.border}>{data.work.email}</Text>
-          <Text style={styles.border}>{data.work.phone_number}</Text>
-          <Text style={styles.border}>{data.work.company}</Text>
-          <Text style={styles.border}>
-            {data.work.department}, {data.work.job_title}{" "}
-          </Text>
+          <View style={globalStyle.information}>
+            <Text style={globalStyle.text}>Work Information</Text>
+          </View>
+          <View style={{ marginBottom: 20 }}>
+            <Image
+              source={{ uri: data.avatar }}
+              style={globalStyle.imageStyle}
+            />
+          </View>
+          <View style={globalStyle.names}>
+            <Text>
+              {data.name.first_name} {data.name.last_name}
+            </Text>
+          </View>
+          <View style={globalStyle.imageMarginizer}>
+            <TouchableOpacity
+              style={globalStyle.buttonStyle}
+              title="click here"
+              onPress={this.changeToHome}
+            >
+              <Text>Show home info</Text>
+            </TouchableOpacity>
+          </View>
+          <View style={globalStyle.informationStyle}>
+            <Text style={styles.border}>{data.work.address}</Text>
+          </View>
+          <View style={globalStyle.informationStyle}>
+            <Text style={styles.border}>{data.work.email}</Text>
+          </View>
+          <View style={globalStyle.informationStyle}>
+            <Text style={styles.border}>{data.work.phone_number}</Text>
+          </View>
+          <View style={globalStyle.informationStyle}>
+            <Text style={styles.border}>{data.work.company}</Text>
+          </View>
+          <View style={globalStyle.informationStyle}>
+            <Text style={styles.border}>
+              {data.work.department}, {data.work.job_title}{" "}
+            </Text>
+          </View>
         </View>
       );
     } else {
       return (
+        // We wrap Animated.View around the component to render the animation along the component
         <Animated.View
           style={{
             transform: [
@@ -85,9 +103,9 @@ class Work extends Component {
             ]
           }}
         >
-        <Home data={this.props.data} />;
-      </Animated.View>
-      )
+          <Home data={this.props.data} />;
+        </Animated.View>
+      );
     }
   }
 }
