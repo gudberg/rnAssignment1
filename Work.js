@@ -70,19 +70,19 @@ class Work extends Component {
             </TouchableOpacity>
           </View>
           <View style={globalStyle.informationStyle}>
-            <Text style={styles.border}>{data.work.address}</Text>
+            <Text>{data.work.address}</Text>
           </View>
           <View style={globalStyle.informationStyle}>
-            <Text style={styles.border}>{data.work.email}</Text>
+            <Text>{data.work.email}</Text>
           </View>
           <View style={globalStyle.informationStyle}>
-            <Text style={styles.border}>{data.work.phone_number}</Text>
+            <Text>{data.work.phone_number}</Text>
           </View>
           <View style={globalStyle.informationStyle}>
-            <Text style={styles.border}>{data.work.company}</Text>
+            <Text>{data.work.company}</Text>
           </View>
           <View style={globalStyle.informationStyle}>
-            <Text style={styles.border}>
+            <Text>
               {data.work.department}, {data.work.job_title}{" "}
             </Text>
           </View>
@@ -90,7 +90,6 @@ class Work extends Component {
       );
     } else {
       return (
-        // We wrap Animated.View around the component to render the animation along the component
         <Animated.View
           style={{
             transform: [
@@ -103,7 +102,7 @@ class Work extends Component {
             ]
           }}
         >
-          <Home data={this.props.data} />;
+          <Home data={this.props.data} />
         </Animated.View>
       );
     }

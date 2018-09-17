@@ -68,7 +68,6 @@ export default class Home extends React.Component {
       );
     } else {
       return (
-        // We wrap Animated.View around the component to render the animation along the component
         <Animated.View
           style={{
             transform: [
