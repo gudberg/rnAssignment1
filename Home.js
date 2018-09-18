@@ -1,8 +1,10 @@
-import React from "react";
-import { Text, View, Image, TouchableOpacity, Animated } from "react-native";
-import Work from "./Work";
+import React from 'react';
+import {
+  Text, View, Image, TouchableOpacity, Animated,
+} from 'react-native';
+import Work from './Work';
 // Global styling declared in style
-var globalStyle = require("./styles");
+const globalStyle = require('./styles');
 
 export default class Home extends React.Component {
   constructor(props) {
@@ -10,7 +12,7 @@ export default class Home extends React.Component {
     this.changeToWork = this.changeToWork.bind(this);
     this.state = {
       home: true,
-      animated: new Animated.Value(0)
+      animated: new Animated.Value(0),
     };
   }
 
@@ -19,31 +21,31 @@ export default class Home extends React.Component {
     // in order to render the Work component
     Animated.timing(this.state.animated, {
       toValue: 1,
-      duration: 700
+      duration: 700,
     }).start();
 
     this.setState({
-      home: false
+      home: false,
     });
   }
 
   render() {
-    const data = this.props.data[0];
-    if (this.state.home) {
+    const { data } = this.props.data[0];
+    const { home } = this.state.home;
+    if (home) {
       return (
         <View>
           <View style={globalStyle.information}>
             <Text style={globalStyle.text}>Home Information</Text>
           </View>
           <View style={{ marginBottom: 20 }}>
-            <Image
-              source={{ uri: data.avatar }}
-              style={globalStyle.imageStyle}
-            />
+            <Image source={{ uri: data.avatar }} style={globalStyle.imageStyle} />
           </View>
           <View style={globalStyle.names}>
             <Text>
-              {data.name.first_name} {data.name.last_name}
+              {data.name.first_name}
+              {' '}
+              {data.name.last_name}
             </Text>
           </View>
           <View style={globalStyle.imageMarginizer}>
@@ -66,23 +68,22 @@ export default class Home extends React.Component {
           </View>
         </View>
       );
-    } else {
-      return (
-        <Animated.View
-          style={{
-            transform: [
-              {
-                scale: this.state.animated.interpolate({
-                  inputRange: [0, 1],
-                  outputRange: [0, 1]
-                })
-              }
-            ]
-          }}
-        >
-          <Work data={this.props.data} />
-        </Animated.View>
-      );
     }
+    return (
+      <Animated.View
+        style={{
+          transform: [
+            {
+              scale: this.state.animated.interpolate({
+                inputRange: [0, 1],
+                outputRange: [0, 1],
+              }),
+            },
+          ],
+        }}
+      >
+        <Work data={this.props.data} />
+      </Animated.View>
+    );
   }
 }

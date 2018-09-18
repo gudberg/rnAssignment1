@@ -1,22 +1,10 @@
-import React, { Component } from "react";
+import React, { Component } from 'react';
 import {
-  StyleSheet,
-  Text,
-  View,
-  Image,
-  Animated,
-  TouchableOpacity
-} from "react-native";
+  StyleSheet, Text, View, Image, Animated, TouchableOpacity,
+} from 'react-native';
+import Home from './Home';
 // Global styling declared in styles.js file
-var globalStyle = require("./styles");
-import Home from "./Home";
-
-const styles = StyleSheet.create({
-  border: {
-    borderBottomWidth: 5,
-    borderBottomColor: "#000"
-  }
-});
+const globalStyle = require('./styles');
 
 class Work extends Component {
   constructor(props) {
@@ -24,7 +12,7 @@ class Work extends Component {
     this.changeToHome = this.changeToHome.bind(this);
     this.state = {
       work: true,
-      animated: new Animated.Value(0)
+      animated: new Animated.Value(0),
     };
   }
 
@@ -33,11 +21,11 @@ class Work extends Component {
     // in order to render the Home component
     Animated.timing(this.state.animated, {
       toValue: 1,
-      duration: 700
+      duration: 700,
     }).start();
 
     this.setState({
-      work: false
+      work: false,
     });
   }
 
@@ -50,14 +38,13 @@ class Work extends Component {
             <Text style={globalStyle.text}>Work Information</Text>
           </View>
           <View style={{ marginBottom: 20 }}>
-            <Image
-              source={{ uri: data.avatar }}
-              style={globalStyle.imageStyle}
-            />
+            <Image source={{ uri: data.avatar }} style={globalStyle.imageStyle} />
           </View>
           <View style={globalStyle.names}>
             <Text>
-              {data.name.first_name} {data.name.last_name}
+              {data.name.first_name}
+              {' '}
+              {data.name.last_name}
             </Text>
           </View>
           <View style={globalStyle.imageMarginizer}>
@@ -83,29 +70,31 @@ class Work extends Component {
           </View>
           <View style={globalStyle.informationStyle}>
             <Text>
-              {data.work.department}, {data.work.job_title}{" "}
+              {data.work.department}
+,
+              {data.work.job_title}
+              {' '}
             </Text>
           </View>
         </View>
       );
-    } else {
-      return (
-        <Animated.View
-          style={{
-            transform: [
-              {
-                scale: this.state.animated.interpolate({
-                  inputRange: [0, 1],
-                  outputRange: [0, 1]
-                })
-              }
-            ]
-          }}
-        >
-          <Home data={this.props.data} />
-        </Animated.View>
-      );
     }
+    return (
+      <Animated.View
+        style={{
+          transform: [
+            {
+              scale: this.state.animated.interpolate({
+                inputRange: [0, 1],
+                outputRange: [0, 1],
+              }),
+            },
+          ],
+        }}
+      >
+        <Home data={this.props.data} />
+      </Animated.View>
+    );
   }
 }
 
