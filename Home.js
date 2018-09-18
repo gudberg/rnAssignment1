@@ -19,7 +19,8 @@ export default class Home extends React.Component {
   changeToWork() {
     // Here we both add the animation and set the state home to false
     // in order to render the Work component
-    Animated.timing(this.state.animated, {
+    const { animated } = this.state;
+    Animated.timing(animated, {
       toValue: 1,
       duration: 700,
     }).start();
@@ -30,8 +31,9 @@ export default class Home extends React.Component {
   }
 
   render() {
-    const { data } = this.props.data[0];
-    const { home } = this.state.home;
+    const { data } = this.props;
+    const homeData = data[0];
+    const { home, animated } = this.state;
     if (home) {
       return (
         <View>
@@ -39,13 +41,13 @@ export default class Home extends React.Component {
             <Text style={globalStyle.text}>Home Information</Text>
           </View>
           <View style={{ marginBottom: 20 }}>
-            <Image source={{ uri: data.avatar }} style={globalStyle.imageStyle} />
+            <Image source={{ uri: homeData.avatar }} style={globalStyle.imageStyle} />
           </View>
           <View style={globalStyle.names}>
             <Text>
-              {data.name.first_name}
+              {homeData.name.first_name}
               {' '}
-              {data.name.last_name}
+              {homeData.name.last_name}
             </Text>
           </View>
           <View style={globalStyle.imageMarginizer}>
@@ -58,13 +60,13 @@ export default class Home extends React.Component {
             </TouchableOpacity>
           </View>
           <View style={globalStyle.informationStyle}>
-            <Text>{data.home.address}</Text>
+            <Text>{homeData.home.address}</Text>
           </View>
           <View style={globalStyle.informationStyle}>
-            <Text>{data.home.email}</Text>
+            <Text>{homeData.home.email}</Text>
           </View>
           <View style={globalStyle.informationStyle}>
-            <Text>{data.home.phone_number}</Text>
+            <Text>{homeData.home.phone_number}</Text>
           </View>
         </View>
       );
@@ -74,7 +76,7 @@ export default class Home extends React.Component {
         style={{
           transform: [
             {
-              scale: this.state.animated.interpolate({
+              scale: animated.interpolate({
                 inputRange: [0, 1],
                 outputRange: [0, 1],
               }),
@@ -82,7 +84,7 @@ export default class Home extends React.Component {
           ],
         }}
       >
-        <Work data={this.props.data} />
+        <Work data={data} />
       </Animated.View>
     );
   }

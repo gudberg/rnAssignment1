@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import {
-  StyleSheet, Text, View, Image, Animated, TouchableOpacity,
+  Text, View, Image, Animated, TouchableOpacity,
 } from 'react-native';
 import Home from './Home';
 // Global styling declared in styles.js file
@@ -19,7 +19,8 @@ class Work extends Component {
   changeToHome() {
     // Here we both add the animation and set the state home to false
     // in order to render the Home component
-    Animated.timing(this.state.animated, {
+    const { animated } = this.state;
+    Animated.timing(animated, {
       toValue: 1,
       duration: 700,
     }).start();
@@ -30,21 +31,23 @@ class Work extends Component {
   }
 
   render() {
-    const data = this.props.data[0];
-    if (this.state.work) {
+    const { data } = this.props;
+    const workData = data[0];
+    const { work, animated } = this.state;
+    if (work) {
       return (
         <View>
           <View style={globalStyle.information}>
             <Text style={globalStyle.text}>Work Information</Text>
           </View>
           <View style={{ marginBottom: 20 }}>
-            <Image source={{ uri: data.avatar }} style={globalStyle.imageStyle} />
+            <Image source={{ uri: workData.avatar }} style={globalStyle.imageStyle} />
           </View>
           <View style={globalStyle.names}>
             <Text>
-              {data.name.first_name}
+              {workData.name.first_name}
               {' '}
-              {data.name.last_name}
+              {workData.name.last_name}
             </Text>
           </View>
           <View style={globalStyle.imageMarginizer}>
@@ -57,22 +60,22 @@ class Work extends Component {
             </TouchableOpacity>
           </View>
           <View style={globalStyle.informationStyle}>
-            <Text>{data.work.address}</Text>
+            <Text>{workData.work.address}</Text>
           </View>
           <View style={globalStyle.informationStyle}>
-            <Text>{data.work.email}</Text>
+            <Text>{workData.work.email}</Text>
           </View>
           <View style={globalStyle.informationStyle}>
-            <Text>{data.work.phone_number}</Text>
+            <Text>{workData.work.phone_number}</Text>
           </View>
           <View style={globalStyle.informationStyle}>
-            <Text>{data.work.company}</Text>
+            <Text>{workData.work.company}</Text>
           </View>
           <View style={globalStyle.informationStyle}>
             <Text>
-              {data.work.department}
+              {workData.work.department}
 ,
-              {data.work.job_title}
+              {workData.work.job_title}
               {' '}
             </Text>
           </View>
@@ -84,7 +87,7 @@ class Work extends Component {
         style={{
           transform: [
             {
-              scale: this.state.animated.interpolate({
+              scale: animated.interpolate({
                 inputRange: [0, 1],
                 outputRange: [0, 1],
               }),
@@ -92,7 +95,7 @@ class Work extends Component {
           ],
         }}
       >
-        <Home data={this.props.data} />
+        <Home data={data} />
       </Animated.View>
     );
   }
